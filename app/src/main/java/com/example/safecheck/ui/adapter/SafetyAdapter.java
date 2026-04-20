@@ -41,6 +41,7 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView title, date, count;
         ImageView statusIcon;
+        View statusStripe;
 
         ViewHolder(View v) {
             super(v);
@@ -48,6 +49,7 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
             date = v.findViewById(R.id.tvDate);
             count = v.findViewById(R.id.tvCount);
             statusIcon = v.findViewById(R.id.ivStatus);
+            statusStripe = v.findViewById(R.id.viewStatusStripe);
         }
     }
 
@@ -69,8 +71,12 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
         holder.count.setText(defectCount + (defectCount == 1 ? " Defect" : " Defects"));
 
         boolean isPass = "Pass".equalsIgnoreCase(data.safetyCheck.overallStatus);
-        holder.statusIcon.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), 
-                isPass ? R.color.status_pass : R.color.status_fail));
+        int statusColor = ContextCompat.getColor(holder.itemView.getContext(), 
+                isPass ? R.color.status_pass : R.color.status_fail);
+        
+        if (holder.statusStripe != null) {
+            holder.statusStripe.setBackgroundColor(statusColor);
+        }
 
         holder.itemView.setOnClickListener(v ->
                 listener.onClick(data.safetyCheck)

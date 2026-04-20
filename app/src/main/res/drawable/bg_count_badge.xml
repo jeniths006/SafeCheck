@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/primary_light" />
-    <corners android:radius="16dp" />
+    <!-- Use the dark primary color for high contrast -->
+    <solid android:color="@color/primary" />
+    <corners android:radius="20dp" />
 </shape>
