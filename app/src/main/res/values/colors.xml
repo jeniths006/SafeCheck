@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Modern Professional Palette -->
-    <color name="primary">#0056D2</color>
+    <!-- Professional Enterprise Palette -->
+    <color name="primary">#0D47A1</color> <!-- Deep Blue -->
     <color name="primary_light">#E3F2FD</color>
-    <color name="primary_dark">#003892</color>
+    <color name="primary_dark">#002171</color>
 
-    <color name="secondary">#FF7043</color>
-    <color name="secondary_light">#FFCCBC</color>
-    <color name="secondary_dark">#D84315</color>
+    <color name="secondary">#1976D2</color>
+    <color name="secondary_light">#63A4FF</color>
+    <color name="secondary_dark">#004BA0</color>
 
-    <color name="status_pass">#2E7D32</color>
-    <color name="status_fail">#C62828</color>
-    <color name="status_warning">#F9A825</color>
+    <color name="status_pass">#2E7D32</color> <!-- Strong Green -->
+    <color name="status_fail">#C62828</color> <!-- Strong Red -->
 
-    <color name="background">#FDFDFD</color>
+    <color name="background">#F5F7FA</color>
     <color name="surface">#FFFFFF</color>
-    <color name="on_surface">#1C1B1F</color>
-    <color name="on_surface_secondary">#49454F</color>
-    <color name="divider">#E0E0E0</color>
+    <color name="on_surface">#263238</color>
+    <color name="on_surface_secondary">#607D8B</color>
+    <color name="divider">#ECEFF1</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
