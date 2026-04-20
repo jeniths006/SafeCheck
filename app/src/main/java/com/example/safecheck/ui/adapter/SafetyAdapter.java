@@ -48,7 +48,7 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
             title = v.findViewById(R.id.tvTitle);
             date = v.findViewById(R.id.tvDate);
             count = v.findViewById(R.id.tvCount);
-            statusIcon = v.findViewById(R.id.ivStatus);
+            statusIcon = v.findViewById(R.id.tvStatus);
             statusStripe = v.findViewById(R.id.viewStatusStripe);
         }
     }
