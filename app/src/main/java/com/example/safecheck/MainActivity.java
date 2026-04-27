@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.example.safecheck.ui.DetailActivity;
 import com.example.safecheck.ui.adapter.SafetyAdapter;
 import com.example.safecheck.ui.viewmodel.SafetyViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -71,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
             }
             tvTotalCount.setText(String.valueOf(total));
             tvFailCount.setText(String.valueOf(failCount));
+            int passCount = Math.max(0, total - failCount);
+            int compliance = total == 0 ? 100 : (int) ((passCount * 100f) / total);
+            tvComplianceLabel.setText("Compliance score: " + compliance + "%");
+            progressCompliance.setProgress(compliance);
+            progressCompliance.setIndicatorColor(ContextCompat.getColor(this,
+                    compliance >= 80 ? R.color.status_pass : R.color.status_fail));
             
             // Toggle empty state visibility
             if (checks == null || checks.isEmpty()) {

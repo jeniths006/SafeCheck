@@ -10,6 +10,7 @@
     <color name="status_pass">#4CAF50</color>
     <color name="status_fail">#F44336</color>
     <color name="status_pill_bg">#EAF4EA</color>
+    <color name="status_pill_bg_fail">#FDECEC</color>
 
     <color name="background">#F5F5F5</color>
     <color name="surface">#FFFFFF</color>
