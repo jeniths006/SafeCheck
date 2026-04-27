@@ -45,6 +45,7 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
             super(v);
             title = v.findViewById(R.id.tvTitle);
             date = v.findViewById(R.id.tvDate);
+            driver = v.findViewById(R.id.tvDriver);
             count = v.findViewById(R.id.tvCount);
             statusText = v.findViewById(R.id.tvStatus);
             statusStripe = v.findViewById(R.id.viewStatusStripe);
@@ -64,6 +65,10 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
 
         holder.title.setText(data.safetyCheck.vehicleRegistration);
         holder.date.setText(data.safetyCheck.date);
+        String driverName = data.safetyCheck.driverName == null || data.safetyCheck.driverName.trim().isEmpty()
+                ? "No driver name"
+                : data.safetyCheck.driverName;
+        holder.driver.setText(driverName);
         
         int defectCount = data.defects.size();
         holder.count.setText(defectCount + (defectCount == 1 ? " Defect" : " Defects"));

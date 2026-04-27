@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private SafetyViewModel viewModel;
     private SafetyAdapter adapter;
     private LinearLayout emptyView;
+    private TextView tvTotalCount;
+    private TextView tvFailCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton btnAdd = findViewById(R.id.btnAdd);
         RecyclerView recycler = findViewById(R.id.recyclerView);
         emptyView = findViewById(R.id.emptyView);
+        tvTotalCount = findViewById(R.id.tvTotalCount);
+        tvFailCount = findViewById(R.id.tvFailCount);
 
         // 🔹 ADAPTER SETUP
         adapter = new SafetyAdapter(check -> {
@@ -54,6 +59,18 @@ public class MainActivity extends AppCompatActivity {
         // 🔹 OBSERVE DATA
         viewModel.getAllChecksWithDefects().observe(this, checks -> {
             adapter.setChecks(checks);
+
+            int total = checks == null ? 0 : checks.size();
+            int failCount = 0;
+            if (checks != null) {
+                for (SafetyCheckWithDefects check : checks) {
+                    if ("Fail".equalsIgnoreCase(check.safetyCheck.overallStatus)) {
+                        failCount++;
+                    }
+                }
+            }
+            tvTotalCount.setText(String.valueOf(total));
+            tvFailCount.setText(String.valueOf(failCount));
             
             // Toggle empty state visibility
             if (checks == null || checks.isEmpty()) {

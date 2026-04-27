@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/bg_main_gradient"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.card.MaterialCardView
@@ -88,7 +88,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tap the + button to add one"
+            android:text="Tap the + button to create your first inspection"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/on_surface_secondary" />
     </LinearLayout>
