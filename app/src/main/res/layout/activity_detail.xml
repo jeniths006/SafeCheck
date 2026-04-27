@@ -81,6 +81,8 @@
                         android:layout_marginTop="4dp"
                         android:textColor="@color/on_surface_secondary"
                         android:textSize="14sp" />
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/on_surface_secondary" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

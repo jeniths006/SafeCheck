@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout emptyView;
     private TextView tvTotalCount;
     private TextView tvFailCount;
-    private TextView tvComplianceLabel;
-    private LinearProgressIndicator progressCompliance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         emptyView = findViewById(R.id.emptyView);
         tvTotalCount = findViewById(R.id.tvTotalCount);
         tvFailCount = findViewById(R.id.tvFailCount);
-        tvComplianceLabel = findViewById(R.id.tvComplianceLabel);
-        progressCompliance = findViewById(R.id.progressCompliance);
 
         // 🔹 ADAPTER SETUP
         adapter = new SafetyAdapter(check -> {

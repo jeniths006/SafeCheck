@@ -30,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SafeCheck Dashboard"
+                android:text="Safety Checks"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 android:textColor="@color/on_surface"
                 android:textStyle="bold" />
@@ -151,6 +152,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerCard" />
 
+                android:text="Track inspections and defects in one place."
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/on_surface_secondary" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
@@ -163,6 +170,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvListHeading"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
         tools:listitem="@layout/item_row" />
 
     <LinearLayout
