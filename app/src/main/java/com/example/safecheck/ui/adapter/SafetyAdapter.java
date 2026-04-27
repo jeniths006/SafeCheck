@@ -39,7 +39,6 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView title, date, driver, count, statusText;
-        TextView title, date, count, statusText;
         View statusStripe;
 
         ViewHolder(View v) {
