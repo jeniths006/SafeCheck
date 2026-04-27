@@ -1,11 +1,13 @@
 package com.example.safecheck.ui;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.safecheck.R;
@@ -35,6 +37,9 @@ public class DetailActivity extends AppCompatActivity {
         // 🔹 FIND VIEWS
         TextView tvVehicle = findViewById(R.id.tvVehicle);
         TextView tvStatus = findViewById(R.id.tvStatus);
+        TextView tvStatusPill = findViewById(R.id.tvStatusPill);
+        TextView tvDriver = findViewById(R.id.tvDriver);
+        TextView tvDate = findViewById(R.id.tvDate);
         TextView tvDefects = findViewById(R.id.tvDefects);
         Button btnEmail = findViewById(R.id.btnEmail);
         Button btnDelete = findViewById(R.id.btnDelete);
@@ -52,6 +57,20 @@ public class DetailActivity extends AppCompatActivity {
                     "Status: " + data.safetyCheck.overallStatus +
                             " (" + data.defects.size() + " defects)"
             );
+            tvDriver.setText("Driver: " + (data.safetyCheck.driverName == null || data.safetyCheck.driverName.isEmpty()
+                    ? "Not provided"
+                    : data.safetyCheck.driverName));
+            tvDate.setText("Date: " + (data.safetyCheck.date == null || data.safetyCheck.date.isEmpty()
+                    ? "Not provided"
+                    : data.safetyCheck.date));
+
+            boolean isPass = "Pass".equalsIgnoreCase(data.safetyCheck.overallStatus);
+            int statusColor = ContextCompat.getColor(this, isPass ? R.color.status_pass : R.color.status_fail);
+            int statusBgColor = ContextCompat.getColor(this, isPass ? R.color.status_pill_bg : R.color.status_pill_bg_fail);
+            tvStatusPill.setText(isPass ? "Pass" : "Fail");
+            tvStatusPill.setTextColor(statusColor);
+            Drawable statusPill = tvStatusPill.getBackground().mutate();
+            statusPill.setTint(statusBgColor);
 
 
             StringBuilder defectsText = new StringBuilder();

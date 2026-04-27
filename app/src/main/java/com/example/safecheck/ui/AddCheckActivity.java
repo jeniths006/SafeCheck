@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.safecheck.R;
@@ -17,6 +18,7 @@ import com.example.safecheck.data.entity.SafetyCheck;
 import com.example.safecheck.ui.viewmodel.SafetyViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
@@ -85,11 +87,45 @@ public class AddCheckActivity extends AppCompatActivity {
         viewModel.getPendingDefects().observe(this, defects -> {
             defectList.removeAllViews();
             for (Defect d : defects) {
-                TextView tv = new TextView(this);
-                tv.setText(String.format("[%s] %s", d.severity, d.description));
-                tv.setPadding(0, 8, 0, 8);
-                tv.setTextSize(16);
-                defectList.addView(tv);
+                MaterialCardView defectCard = new MaterialCardView(this);
+                defectCard.setRadius(14f);
+                defectCard.setCardElevation(0f);
+                defectCard.setStrokeWidth(1);
+                defectCard.setStrokeColor(ContextCompat.getColor(this, R.color.surface_border));
+                defectCard.setCardBackgroundColor(ContextCompat.getColor(this, R.color.surface));
+
+                LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                cardParams.bottomMargin = 12;
+                defectCard.setLayoutParams(cardParams);
+
+                LinearLayout cardContent = new LinearLayout(this);
+                cardContent.setOrientation(LinearLayout.VERTICAL);
+                cardContent.setPadding(20, 16, 20, 16);
+
+                TextView severityBadge = new TextView(this);
+                boolean isHigh = "High".equalsIgnoreCase(d.severity);
+                severityBadge.setText(isHigh ? "HIGH SEVERITY" : "LOW SEVERITY");
+                severityBadge.setTextSize(11f);
+                severityBadge.setTextColor(ContextCompat.getColor(this, isHigh ? R.color.status_fail : R.color.status_pass));
+                severityBadge.setPadding(16, 6, 16, 6);
+                severityBadge.setBackgroundResource(R.drawable.bg_status_pill);
+                severityBadge.getBackground().setTint(ContextCompat.getColor(this,
+                        isHigh ? R.color.status_pill_bg_fail : R.color.status_pill_bg
+                ));
+
+                TextView description = new TextView(this);
+                description.setText(d.description);
+                description.setTextSize(15f);
+                description.setTextColor(ContextCompat.getColor(this, R.color.on_surface));
+                description.setPadding(0, 10, 0, 0);
+
+                cardContent.addView(severityBadge);
+                cardContent.addView(description);
+                defectCard.addView(cardContent);
+                defectList.addView(defectCard);
             }
         });
 
