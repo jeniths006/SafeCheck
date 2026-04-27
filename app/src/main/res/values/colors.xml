@@ -9,9 +9,11 @@
 
     <color name="status_pass">#4CAF50</color>
     <color name="status_fail">#F44336</color>
+    <color name="status_pill_bg">#EAF4EA</color>
 
     <color name="background">#F5F5F5</color>
     <color name="surface">#FFFFFF</color>
+    <color name="surface_border">#E6E8EF</color>
     <color name="on_surface">#212121</color>
     <color name="on_surface_secondary">#757575</color>
 

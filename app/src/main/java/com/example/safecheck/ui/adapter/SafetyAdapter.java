@@ -3,7 +3,6 @@ package com.example.safecheck.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -39,8 +38,7 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, date, count;
-        ImageView statusIcon;
+        TextView title, date, count, statusText;
         View statusStripe;
 
         ViewHolder(View v) {
@@ -48,7 +46,7 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
             title = v.findViewById(R.id.tvTitle);
             date = v.findViewById(R.id.tvDate);
             count = v.findViewById(R.id.tvCount);
-            statusIcon = v.findViewById(R.id.tvStatus);
+            statusText = v.findViewById(R.id.tvStatus);
             statusStripe = v.findViewById(R.id.viewStatusStripe);
         }
     }
@@ -73,7 +71,10 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
         boolean isPass = "Pass".equalsIgnoreCase(data.safetyCheck.overallStatus);
         int statusColor = ContextCompat.getColor(holder.itemView.getContext(), 
                 isPass ? R.color.status_pass : R.color.status_fail);
-        
+
+        holder.statusText.setText(isPass ? "Pass" : "Fail");
+        holder.statusText.setTextColor(statusColor);
+
         if (holder.statusStripe != null) {
             holder.statusStripe.setBackgroundColor(statusColor);
         }

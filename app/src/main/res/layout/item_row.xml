@@ -5,10 +5,11 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="6dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
-    app:cardBackgroundColor="@color/white"
-    app:strokeWidth="0dp">
+    app:cardBackgroundColor="@color/surface"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/surface_border"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,17 +35,32 @@
                 android:text="Vehicle Registration"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/on_surface"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tvStatus"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_status_pill"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="Pass"
+                android:textColor="@color/status_pass"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTitle" />
 
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="6dp"
                 android:text="2023-10-27"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/on_surface_secondary"
@@ -58,11 +74,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_count_badge"
-                android:paddingHorizontal="14dp"
-                android:paddingVertical="6dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="5dp"
                 android:text="0 Defects"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvDate" />
