@@ -38,7 +38,7 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, date, driver, count, statusText;
+        TextView title, date, count, statusText;
         View statusStripe;
 
         ViewHolder(View v) {
@@ -79,10 +79,6 @@ public class SafetyAdapter extends RecyclerView.Adapter<SafetyAdapter.ViewHolder
 
         holder.statusText.setText(isPass ? "Pass" : "Fail");
         holder.statusText.setTextColor(statusColor);
-        holder.statusText.getBackground().setTint(ContextCompat.getColor(
-                holder.itemView.getContext(),
-                isPass ? R.color.status_pill_bg : R.color.status_pill_bg_fail
-        ));
 
         if (holder.statusStripe != null) {
             holder.statusStripe.setBackgroundColor(statusColor);
