@@ -71,22 +71,22 @@ public class AddCheckActivity extends AppCompatActivity {
 
         // 🔹 VIEWMODEL -> UI (RESTORE STATE ON ROTATION)
         viewModel.vehicleRegInput.observe(this, s -> {
-            if (!s.equals(etVehicle.getText().toString())) {
+            if (!s.equals(String.valueOf(etVehicle.getText()))) {
                 etVehicle.setText(s);
             }
         });
         viewModel.driverNameInput.observe(this, s -> {
-            if (!s.equals(etDriver.getText().toString())) {
+            if (!s.equals(String.valueOf(etDriver.getText()))) {
                 etDriver.setText(s);
             }
         });
         viewModel.dateInput.observe(this, s -> {
-            if (!s.equals(etDate.getText().toString())) {
+            if (!s.equals(String.valueOf(etDate.getText()))) {
                 etDate.setText(s);
             }
         });
         viewModel.defectDescriptionInput.observe(this, s -> {
-            if (!s.equals(etDefect.getText().toString())) {
+            if (!s.equals(String.valueOf(etDefect.getText()))) {
                 etDefect.setText(s);
             }
         });
@@ -210,7 +210,7 @@ public class AddCheckActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        getOnBackPressedDispatcher().onBackPressed();
         return true;
     }
 

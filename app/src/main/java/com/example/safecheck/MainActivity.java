@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
+                int position = viewHolder.getBindingAdapterPosition();
                 List<SafetyCheckWithDefects> currentList = adapter.getCurrentList();
                 
                 if (currentList != null && position < currentList.size()) {
@@ -119,8 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     
                     Snackbar.make(recycler, "Safety Check for " + toDelete.safetyCheck.vehicleRegistration + " deleted", Snackbar.LENGTH_LONG)
                             .setAction("UNDO", v -> {
-                                // Re-insert logic could go here, but for now we just notify
-                                // viewModel.insert(toDelete.safetyCheck, toDelete.defects);
+                                viewModel.insert(toDelete.safetyCheck, toDelete.defects);
                             })
                             .show();
                 }
