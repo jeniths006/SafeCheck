@@ -91,7 +91,9 @@
                             android:id="@+id/etDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="date" />
+                            android:focusable="false"
+                            android:cursorVisible="false"
+                            android:inputType="none" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

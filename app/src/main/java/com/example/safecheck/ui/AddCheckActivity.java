@@ -46,6 +46,14 @@ public class AddCheckActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(SafetyViewModel.class);
 
+        // 🔹 SET DEFAULT DATE IF EMPTY
+        if (viewModel.dateInput.getValue() == null || viewModel.dateInput.getValue().isEmpty()) {
+            Calendar c = Calendar.getInstance();
+            String currentDate = String.format(Locale.getDefault(), "%02d/%02d/%d", 
+                    c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH) + 1, c.get(Calendar.YEAR));
+            viewModel.dateInput.setValue(currentDate);
+        }
+
         // 🔹 ENABLE BACK BUTTON
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,15 +70,34 @@ public class AddCheckActivity extends AppCompatActivity {
         });
 
         // 🔹 VIEWMODEL -> UI (RESTORE STATE ON ROTATION)
-        etVehicle.setText(viewModel.vehicleRegInput.getValue());
-        etDriver.setText(viewModel.driverNameInput.getValue());
-        etDate.setText(viewModel.dateInput.getValue());
-        etDefect.setText(viewModel.defectDescriptionInput.getValue());
-        if ("High".equals(viewModel.defectSeverityInput.getValue())) {
-            toggleSeverity.check(R.id.btnHigh);
-        } else {
-            toggleSeverity.check(R.id.btnLow);
-        }
+        viewModel.vehicleRegInput.observe(this, s -> {
+            if (!s.equals(etVehicle.getText().toString())) {
+                etVehicle.setText(s);
+            }
+        });
+        viewModel.driverNameInput.observe(this, s -> {
+            if (!s.equals(etDriver.getText().toString())) {
+                etDriver.setText(s);
+            }
+        });
+        viewModel.dateInput.observe(this, s -> {
+            if (!s.equals(etDate.getText().toString())) {
+                etDate.setText(s);
+            }
+        });
+        viewModel.defectDescriptionInput.observe(this, s -> {
+            if (!s.equals(etDefect.getText().toString())) {
+                etDefect.setText(s);
+            }
+        });
+
+        viewModel.defectSeverityInput.observe(this, s -> {
+            if ("High".equals(s)) {
+                toggleSeverity.check(R.id.btnHigh);
+            } else {
+                toggleSeverity.check(R.id.btnLow);
+            }
+        });
 
         // 🔹 UI -> VIEWMODEL (SAVE STATE AS USER TYPES)
         etVehicle.addTextChangedListener(new SimpleTextWatcher(s -> viewModel.vehicleRegInput.setValue(s)));
@@ -141,18 +168,32 @@ public class AddCheckActivity extends AppCompatActivity {
 
         btnSave.setOnClickListener(v -> {
             String vehicleReg = viewModel.vehicleRegInput.getValue();
+            String driverName = viewModel.driverNameInput.getValue();
+            String date = viewModel.dateInput.getValue();
             
-            // 🔹 2.3 INPUT VALIDATION
+            // 🔹 INPUT VALIDATION
             if (vehicleReg == null || vehicleReg.trim().isEmpty()) {
-                Toast.makeText(this, "Please enter vehicle details", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter vehicle registration", Toast.LENGTH_SHORT).show();
                 etVehicle.setError("Registration Required");
+                return;
+            }
+
+            if (driverName == null || driverName.trim().isEmpty()) {
+                Toast.makeText(this, "Please enter driver name", Toast.LENGTH_SHORT).show();
+                etDriver.setError("Driver Name Required");
+                return;
+            }
+
+            if (date == null || date.trim().isEmpty()) {
+                Toast.makeText(this, "Please select a date", Toast.LENGTH_SHORT).show();
+                etDate.setError("Date Required");
                 return;
             }
 
             SafetyCheck check = new SafetyCheck();
             check.vehicleRegistration = vehicleReg;
-            check.driverName = viewModel.driverNameInput.getValue();
-            check.date = viewModel.dateInput.getValue();
+            check.driverName = driverName;
+            check.date = date;
             
             // 🔹 DYNAMIC STATUS
             boolean hasDefects = viewModel.getPendingDefects().getValue() != null && 

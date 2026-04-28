@@ -63,7 +63,12 @@ public class SafetyViewModel extends AndroidViewModel {
     public void clearForm() {
         vehicleRegInput.setValue("");
         driverNameInput.setValue("");
-        dateInput.setValue("");
+        
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        String currentDate = String.format(java.util.Locale.getDefault(), "%02d/%02d/%d", 
+                c.get(java.util.Calendar.DAY_OF_MONTH), c.get(java.util.Calendar.MONTH) + 1, c.get(java.util.Calendar.YEAR));
+        dateInput.setValue(currentDate);
+
         defectDescriptionInput.setValue("");
         defectSeverityInput.setValue("Low");
         pendingDefects.setValue(new ArrayList<>());

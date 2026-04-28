@@ -91,28 +91,19 @@ public class DetailActivity extends AppCompatActivity {
 
 
             btnEmail.setOnClickListener(v -> {
-                String subject = "Safety Defect Report: " + data.safetyCheck.vehicleRegistration;
-                
-                StringBuilder body = new StringBuilder();
-                body.append("Vehicle: ").append(data.safetyCheck.vehicleRegistration).append("\n");
-                body.append("Driver: ").append(data.safetyCheck.driverName).append("\n");
-                body.append("Date: ").append(data.safetyCheck.date).append("\n");
-                body.append("Status: ").append(data.safetyCheck.overallStatus).append("\n\n");
-                body.append("Defects Found:\n");
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(android.net.Uri.parse("mailto:"));
 
-                if (data.defects.isEmpty()) {
-                    body.append("- No defects reported.");
-                } else {
-                    for (Defect d : data.defects) {
-                        body.append("- ").append(d.description).append(" (").append(d.severity).append(")\n");
-                    }
+                intent.putExtra(Intent.EXTRA_SUBJECT,
+                        "Safety Defect Report: " + data.safetyCheck.vehicleRegistration);
+
+                StringBuilder body = new StringBuilder();
+                for (Defect d : data.defects) {
+                    body.append("- ").append(d.getDescription()).append("\n");
                 }
 
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(android.net.Uri.parse("mailto:")); // ensures only email apps handle this
-                intent.putExtra(Intent.EXTRA_SUBJECT, subject);
                 intent.putExtra(Intent.EXTRA_TEXT, body.toString());
-                
+
                 try {
                     startActivity(intent);
                 } catch (android.content.ActivityNotFoundException ex) {
